@@ -11,10 +11,10 @@ function Observer(obj, key, value){
 		enumerable: true,
     	configurable: true,
     	get: function(){
+            // 有生成监听对象的时候
     		if (Dep.target) {
     			dep.addSub(Dep.target);
             };
-            log('get value', value)
     		return value;
     	},
     	set: function(newVal){
@@ -29,7 +29,6 @@ function Dep(){
 
 	this.addSub = function (watcher) {
 		this.subs.push(watcher);
-		console.log(this.subs.length);
 	}
 
 	this.removeSub = function (watcher) {
@@ -43,7 +42,8 @@ function Dep(){
 		this.subs.forEach(function(watcher){
 			watcher.update();
 		});
-	}
+    }
+    log('this sub', this.subs)
 }
 
 function Watcher(fn){
