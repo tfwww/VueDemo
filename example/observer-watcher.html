@@ -17,10 +17,11 @@
 	}
 	Object.keys(obj).forEach(function(key){
 		new Observer(obj, key, obj[key])
-	});
+    });
+
 	new Watcher(function(){
         var el = document.querySelector('#test')
-		el.innerHTML = obj.a
+		el.innerText = obj.a
     })
 </script>
 </body>

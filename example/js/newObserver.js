@@ -1,15 +1,17 @@
+var target = null
 // 观察者
 function Observer(obj, key, value) {
     var control = new Controller()
     Object.defineProperty(obj, key, {
         enumerable: true,
         configurable: true,
-        get: function(value) {
+        get: function() {
+            log('target', target)
+            control.addEvent(target)
             return value
         },
         set: function(newVal) {
-
-            control.addEvent()
+            value = newVal
             // 通知有改动
             control.notify()
         }
@@ -19,7 +21,10 @@ function Observer(obj, key, value) {
 // 监听到变化做相应的 fn 动作
 function Watcher(fn) {
     this.update = function() {
+        log('watch update')
+        target = this
         fn()
+        target = null
     }
     this.update()
 }
@@ -35,8 +40,8 @@ function Controller() {
     this.notify = function() {
         log('notify')
         // 告诉 watcher 要做变化了
-        thi.event.array.forEach(element => {
-
+        this.event.forEach(function(watcher) {
+            watcher.update()
         });
     }
 }

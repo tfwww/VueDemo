@@ -12,9 +12,9 @@ function Observer(obj, key, value){
     	configurable: true,
     	get: function(){
             // 有生成监听对象的时候
-    		if (Dep.target) {
+    		// if (Dep.target) {
     			dep.addSub(Dep.target);
-            };
+            // };
     		return value;
     	},
     	set: function(newVal){
@@ -48,9 +48,9 @@ function Dep(){
 
 function Watcher(fn){
 	this.update = function(){
-		Dep.target = this;
+		// Dep.target = this;
 		fn();
-		Dep.target = null;
+		// Dep.target = null;
 	}
 	this.update();
 }
